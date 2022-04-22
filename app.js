@@ -1,7 +1,8 @@
 const tileDisplay = document.querySelector('.tile-container')
 const teclado = document.querySelector('.key-container')
+const messageDisplay = document.querySelector('.message-container')
 
-
+const wordle = 'GERVA'
 
 const teclas = [ 'Q',
                 'W',
@@ -45,6 +46,7 @@ const intentos = [
 
 let filaActual = 0
 let posicionActual = 0
+let isGameOver = false
 
 intentos.forEach((intento,indexElementoFila) =>{
     /* Genero un div por cada fila del array*/
@@ -101,21 +103,64 @@ const borrarLetra = () => {
     intentos[filaActual][posicionActual] = ''
     posicion.setAttribute('data', '')
 }
+
 }
 
 const verificarInteto = () => {
     const intento = intentos[filaActual].join('')
-    let wordle = 'Gerva'
-    if (posicionActual === 5){
+    if (posicionActual > 4){
+        flipToColor()
         console.log('Ud dijo '+intento +'  y wordle es '+ wordle)
-        if (intento === wordle){
-            mostrarMensaje("Felicitaciones")
+        if (intento == wordle){
+            mostrarMensaje("Felicitaciones");
+            isGameOver =true
+            return
+        }else {
+            if(filaActual >= 5){
+                isGameOver = false
+                mostrarMensaje("Game Over :(")
+                return
+            }
+            if (filaActual < 5){
+                filaActual++
+                posicionActual = 0
+            }
         }
+    
     }
+
 }
 
-const mostrarMensaje = (mensaje) => {
+function mostrarMensaje(mensaje) {
     const elementoMensaje = document.createElement('p')
     elementoMensaje.textContent = mensaje
     messageDisplay.append(elementoMensaje)
+    setTimeout(() => messageDisplay.removeChild(elementoMensaje),2500) //para hacer desaparacer el mensaje en 2,5 seg
+}
+
+const coloreartecla= (teclaColorear, color) =>{
+    teclaColorear = document.getElementById(teclaColorear);
+    teclaColorear.classList.add(color);
+}
+
+
+const flipToColor = () => {
+    const posiciones_fila = document.getElementById('intento-'+filaActual).childNodes
+
+    posiciones_fila.forEach((posicion, index) =>{
+        const dataLetter = posicion.getAttribute('data');
+        setTimeout(()=> {
+            posicion.classList.add('flipPosicion')
+            if (dataLetter == wordle[index]){
+                posicion.classList.add('verde-overlay')
+                coloreartecla(dataLetter,'verde-overlay')
+            }else if(wordle.includes(dataLetter)) {
+                posicion.classList.add('amarillo-overlay')
+                coloreartecla(dataLetter,'amarillo-overlay')
+            }else{
+                posicion.classList.add('gris-overlay');
+                coloreartecla(dataLetter,'gris-overlay')
+            }
+        },300*index)
+    })
 }

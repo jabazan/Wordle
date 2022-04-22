@@ -21,8 +21,16 @@ body{
     border-bottom: solid 1px #3a3a3c;
 }
 
-.message-container{}
+.message-container{
+    height: 30px;
+}
 
+.message-container p {
+    background-color: #818384;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0px;
+}
 
 .tile-container{
     width: 330px;
@@ -68,5 +76,35 @@ body{
     justify-content: center;
     align-content: center;
     margin: 2px;
+ }
 
+.posicion.flipPosicion{
+    animation: 0.5s linear flipping;
+}
+
+@keyframes flipping {
+    0%{
+        transform: rotateX(0deg);
+    }
+    50%{
+        transform: rotateX(90deg);
+    }
+    100%{
+        transform: rotateX(0deg);
+    }
+}
+
+ .gris-overlay{
+    background-color: #3A3A3C !important;
+    border: none i !important;
+ }
+
+ .amarillo-overlay{
+    background-color: #B59F3A !important;
+    border: none i !important;
+ }
+
+ .verde-overlay{
+    background-color: #538D4E !important;
+    border: none i !important;
  }
