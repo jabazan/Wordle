@@ -83,7 +83,6 @@ const handleClick = (letra) => {
     agregarLetra(letra)
 }
 
-
 const agregarLetra = (letra) => {
     if(posicionActual < 5 && filaActual < 6){
     const posicion = document.getElementById('intento-'+ filaActual + '-posicion-'+ posicionActual)
@@ -102,8 +101,6 @@ const borrarLetra = () => {
     posicion.textContent = ''
     intentos[filaActual][posicionActual] = ''
     posicion.setAttribute('data', '')
-}
-
 }
 
 const verificarInteto = () => {
@@ -128,7 +125,6 @@ const verificarInteto = () => {
         }
     
     }
-
 }
 
 function mostrarMensaje(mensaje) {
@@ -142,7 +138,6 @@ const coloreartecla= (teclaColorear, color) =>{
     teclaColorear = document.getElementById(teclaColorear);
     teclaColorear.classList.add(color);
 }
-
 
 const flipToColor = () => {
     const posiciones_fila = document.getElementById('intento-'+filaActual).childNodes
